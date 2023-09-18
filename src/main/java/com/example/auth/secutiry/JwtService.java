@@ -4,9 +4,12 @@ import com.example.auth.domain.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.SecretKey;
+import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,12 +35,13 @@ public class JwtService {
             Map<String, Object> extraClaims,
             User user
     ) {
+        SecretKey secretKey = Keys.hmacShaKeyFor(secret.getBytes());
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 30))
-                .signWith(SignatureAlgorithm.HS256, secret.getBytes())
+                .signWith(secretKey)
                 .compact();
     }
 
@@ -53,10 +57,10 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-        return (Claims) Jwts.parser()
+        return (Claims) Jwts.parserBuilder()
                 .setSigningKey(secret.getBytes())
+                .build()
                 .parse(token)
                 .getBody();
-
     }
 }

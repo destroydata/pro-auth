@@ -22,12 +22,14 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public AuthenticationResponse login(@RequestBody AuthenticationRequest authenticationRequest) {
+    public AuthenticationResponse login(
+            @RequestBody AuthenticationRequest authenticationRequest) {
         return userService.authenticate(authenticationRequest);
     }
 
     @GetMapping("/me")
-    public TokenInfoResponse me(@AuthenticationPrincipal TokenInfo tokenInfo) {
+    public TokenInfoResponse me(
+            @AuthenticationPrincipal TokenInfo tokenInfo) {
         return userService.getMe(tokenInfo);
     }
 

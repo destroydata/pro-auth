@@ -26,8 +26,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final Map<Role, CustomUrl> urlList;
-
-
     public void register(RegisterRequest request) {
         User user = User.builder()
                 .email(request.email())
