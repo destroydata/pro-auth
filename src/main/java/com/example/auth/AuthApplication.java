@@ -25,10 +25,10 @@ public class AuthApplication {
         Map<Role, CustomUrl> map = new HashMap<>();
         map.put(Role.YJ, new CustomUrl("http://localhost:8000", "http://localhost:3000/auth"));
         map.put(Role.KS, new CustomUrl("http://localhost:8000", "http://localhost:3000/auth"));
-        map.put(Role.JS, new CustomUrl("http://localhost:8000", "http://localhost:3000/auth"));
+        map.put(Role.JS, new CustomUrl("http://localhost:8000", "http://192.168.0.249:3000/auth"));
         map.put(Role.JK, new CustomUrl("http://localhost:8000", "http://localhost:3000/auth"));
         map.put(Role.KH, new CustomUrl("http://localhost:8000", "http://localhost:3000/auth"));
-        map.put(Role.JH, new CustomUrl("http://localhost:8000", "http://localhost:3000/auth"));
+        map.put(Role.JH, new CustomUrl("http://localhost:8000", "http://192.168.0.203:3000/auth"));
         map.put(Role.TEST, new CustomUrl("http://localhost:8000", "http://localhost:3000/auth"));
         return map;
     }

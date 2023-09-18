@@ -39,7 +39,7 @@ public class UserService {
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         User user = userRepository.findByEmail(request.email())
                 .orElseThrow(()->new RuntimeException("User Not Found"));
-        if(passwordEncoder.matches(user.getPassword(), request.password())){
+        if(passwordEncoder.matches(request.password(), user.getPassword())){
             throw new RuntimeException("User Not Found");
         }
         String jwtToken = jwtService.generateToken(user);
